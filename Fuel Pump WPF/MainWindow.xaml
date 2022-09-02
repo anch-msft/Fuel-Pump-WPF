@@ -5,8 +5,195 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel_Pump_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fuel Pump Simulator" Height="720" Width="1280">
+    <Window.Resources>
+        <Style x:Key="blockNumberText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="blockNumberLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style x:Key="screenButtonLeft" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="screenButtonRight" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="keyPadButton" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="5, 0, 0, 5"/>
+            <Setter Property="BorderBrush" Value="#FF1E1E1E"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="fuelTypeButton" TargetType="Button">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="10, 2, 2, 10"/>
+            <Setter Property="FontSize" Value="60"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#FF383838"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowFrameColorKey}}"/>
+    </Window.Background>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="480"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="120,0,140,0" Grid.Column="1">
+            <TextBlock Margin="20,10,0,0" Style="{StaticResource blockNumberLabel}">Sale</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource blockNumberLabel}" FontSize="28" Width="20">$</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" FontSize="32" Width="200" TextAlignment="Right">00.00</TextBlock>
+            </StackPanel>
+            <TextBlock Margin="20,5,0,0" Style="{StaticResource blockNumberLabel}">Gallons</TextBlock>
+            <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                <TextBlock Margin="20,0,0,0" Style="{StaticResource blockNumberText}" FontSize="32" Width="200" TextAlignment="Right">00.000</TextBlock>
+            </StackPanel>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1" Rows="4">
+            <Button Style="{StaticResource screenButtonLeft}"/>
+            <Button Style="{StaticResource screenButtonLeft}"/>
+            <Button Style="{StaticResource screenButtonLeft}"/>
+            <Button Style="{StaticResource screenButtonLeft}"/>
+        </UniformGrid>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="10" BorderBrush="Black">
+            <Frame Grid.Column="1" Grid.Row="1" Width="480" Height="360">
+
+            </Frame>
+        </Border>
+
+
+        <UniformGrid Grid.Row="1" Grid.Column="2" Rows="4">
+            <Button Style="{StaticResource screenButtonRight}"/>
+            <Button Style="{StaticResource screenButtonRight}"/>
+            <Button Style="{StaticResource screenButtonRight}"/>
+            <Button Style="{StaticResource screenButtonRight}"/>
+        </UniformGrid>
+
+        <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button FontSize="20" Padding="5,0" Width="250">Insert Credit/Debit Card</Button>
+            <Border BorderBrush="Black" BorderThickness="5" Background="Silver" Margin="20, 10">
+                <UniformGrid Width="160" Height="250" Grid.Column="3" Grid.Row="1" Rows="4" Columns="3">
+                    <Button Style="{StaticResource keyPadButton}" Content="1"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="2"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="3"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="4"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="5"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="6"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="7"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="8"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="9"/>
+                    <Button Style="{StaticResource keyPadButton}" Background="Yellow" Foreground="Black" Content="Clear"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="0"/>
+                    <Button Style="{StaticResource keyPadButton}" Background="LightGreen" Foreground="Black" Content="Enter"/>
+                </UniformGrid>
+            </Border>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="3" Grid.ColumnSpan="3" Rows="1" Columns="4" Margin="0,8,0,0">
+            <UniformGrid.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Margin" Value="10, 5"/>
+                </Style>
+            </UniformGrid.Resources>
+            <StackPanel Background="ForestGreen">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Diesel</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.19</TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="26" Background="ForestGreen">Diesel</Button>
+            </StackPanel>
+            <StackPanel Background="Red">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Regular</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">3.89</TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">87</Button>
+            </StackPanel>
+            <StackPanel Background="LightGray">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Plus</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.09</TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">89</Button>
+            </StackPanel>
+            <StackPanel Background="Silver">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Premium</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.29</TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">91</Button>
+            </StackPanel>
+        </UniformGrid>
+
+        <DockPanel Grid.Column="4" Grid.RowSpan="3" Background="White">
+            <GroupBox DockPanel.Dock="Top" Margin="5" Padding="5">
+                <GroupBox.Header>
+                    <TextBlock FontSize="18" FontWeight="Bold">Settings</TextBlock>
+                </GroupBox.Header>
+                <StackPanel>
+                    <Button>Change values</Button>
+                    <Button>Reset to default</Button>
+                    <Button>Choose video file</Button>
+                    <TextBlock>Video:</TextBlock>
+                    <TextBlock>None</TextBlock>
+                    <CheckBox>Show FPS</CheckBox>
+                </StackPanel>
+            </GroupBox>
+            <TextBlock DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">FPS: N/A</TextBlock>
+        </DockPanel>
+        
+        
+
+        <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Center">
+            <Button Width="190" FontSize="20">Begin Fueling</Button>
+        </StackPanel>
 
     </Grid>
 </Window>
