@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel_Pump_WPF"
         mc:Ignorable="d"
-        Title="Fuel Pump Simulator" Height="720" Width="1280">
+        Title="Fuel Pump Simulator"
+        SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Style x:Key="blockNumberText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
@@ -77,7 +78,7 @@
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowFrameColorKey}}"/>
     </Window.Background>
 
-    <Grid>
+    <Grid Width="1280" Height="720">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="480"/>
@@ -88,7 +89,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="360"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         
         <StackPanel Margin="120,0,140,0" Grid.Column="1">
@@ -145,30 +146,26 @@
         </StackPanel>
 
         <UniformGrid Grid.Row="3" Grid.ColumnSpan="3" Rows="1" Columns="4" Margin="0,8,0,0">
-            <UniformGrid.Resources>
-                <Style TargetType="StackPanel">
-                    <Setter Property="Margin" Value="10, 5"/>
-                </Style>
-            </UniformGrid.Resources>
+
             <StackPanel Background="ForestGreen">
                 <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Diesel</TextBlock>
                 <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.19</TextBlock>
-                <Button Style="{StaticResource fuelTypeButton}" FontSize="26" Background="ForestGreen">Diesel</Button>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="26" Background="ForestGreen" Margin="10">Diesel</Button>
             </StackPanel>
             <StackPanel Background="Red">
                 <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Regular</TextBlock>
                 <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">3.89</TextBlock>
-                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">87</Button>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10">87</Button>
             </StackPanel>
             <StackPanel Background="LightGray">
                 <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Plus</TextBlock>
                 <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.09</TextBlock>
-                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">89</Button>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10">89</Button>
             </StackPanel>
             <StackPanel Background="Silver">
                 <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Premium</TextBlock>
                 <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5">4.29</TextBlock>
-                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow">91</Button>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10">91</Button>
             </StackPanel>
         </UniformGrid>
 
@@ -188,12 +185,9 @@
             </GroupBox>
             <TextBlock DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">FPS: N/A</TextBlock>
         </DockPanel>
-        
-        
 
         <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Center">
             <Button Width="190" FontSize="20">Begin Fueling</Button>
         </StackPanel>
-
     </Grid>
 </Window>
