@@ -8,6 +8,13 @@
         Title="Fuel Pump Simulator"
         SizeToContent="WidthAndHeight">
     <Window.Resources>
+        <Style TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="blockNumberText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="Gray"/>
@@ -73,6 +80,9 @@
                 </Style>
             </Style.Resources>
         </Style>
+        <Style x:Key="mainScreen" TargetType="Grid">
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
     </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowFrameColorKey}}"/>
@@ -112,7 +122,7 @@
         </UniformGrid>
 
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="10" BorderBrush="Black">
-            <Frame Grid.Column="1" Grid.Row="1" Width="480" Height="360">
+            <Frame Grid.Column="1" Grid.Row="1" Width="480" Height="360" Source="Welcome.xaml">
 
             </Frame>
         </Border>
