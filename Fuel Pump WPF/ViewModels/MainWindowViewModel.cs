@@ -243,7 +243,7 @@ namespace Fuel_Pump_WPF
 
         private void PaymentButtonHandler()
         {
-            if (_appState == "Payment")
+            if (_appState == "Payment" || _appState == "Welcome")
             {
                 CurrentDisplayViewModel = new D6PaymentValidationViewModel();
                 _appState = "PaymentValidation";
