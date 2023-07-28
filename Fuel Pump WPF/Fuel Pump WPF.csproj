@@ -8,4 +8,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\ForBiggerFun480p.mp4" />
+    <None Remove="Assets\GoogleChromeCastAds480p.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\GoogleChromeCastAds480p.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
 </Project>

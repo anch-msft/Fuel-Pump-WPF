@@ -1,0 +1,205 @@
+﻿<Window x:Class="Fuel_Pump_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fuel_Pump_WPF"
+        mc:Ignorable="d"
+        Title="Fuel Pump Simulator"
+        SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <local:DoubleConverter2 x:Key="DoubleConverter2"/>
+        <local:DoubleConverter3 x:Key="DoubleConverter3"/>
+        <Style TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="blockNumberText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="blockNumberLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style x:Key="screenButtonLeft" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="screenButtonRight" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="keyPadButton" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="5, 0, 0, 5"/>
+            <Setter Property="BorderBrush" Value="#FF1E1E1E"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="fuelTypeButton" TargetType="Button">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="10, 2, 2, 10"/>
+            <Setter Property="FontSize" Value="60"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#FF383838"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="mainScreen" TargetType="Grid">
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
+        <DataTemplate DataType="{x:Type local:DisplayViewModel}">
+            <local:DisplayView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DisplayVideoViewModel}">
+            <local:DisplayVideoView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowFrameColorKey}}"/>
+    </Window.Background>
+
+    <Grid Width="1280" Height="720">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="480"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="120,0,140,0" Grid.Column="1">
+            <TextBlock Margin="20,10,0,0" Style="{StaticResource blockNumberLabel}">Sale</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource blockNumberLabel}" FontSize="28" Width="20">$</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" FontSize="32" Width="200" TextAlignment="Right" Text="{Binding SalePrice, Converter={StaticResource DoubleConverter2}}"></TextBlock>
+            </StackPanel>
+            <TextBlock Margin="20,5,0,0" Style="{StaticResource blockNumberLabel}">Gallons</TextBlock>
+            <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                <TextBlock Margin="20,0,0,0" Style="{StaticResource blockNumberText}" FontSize="32" Width="200" TextAlignment="Right" Text="{Binding GallonsPumped, Converter={StaticResource DoubleConverter3}}"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1" Rows="4">
+            <Button Style="{StaticResource screenButtonLeft}" Command="{Binding DisplayButtonPress}" CommandParameter="1"/>
+            <Button Style="{StaticResource screenButtonLeft}" Command="{Binding DisplayButtonPress}" CommandParameter="2"/>
+            <Button Style="{StaticResource screenButtonLeft}" Command="{Binding DisplayButtonPress}" CommandParameter="3"/>
+            <Button Style="{StaticResource screenButtonLeft}" Command="{Binding DisplayButtonPress}" CommandParameter="4"/>
+        </UniformGrid>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="10" BorderBrush="Black">
+            <Grid x:Name="MainDisplay">
+                <ContentControl Content="{Binding CurrentDisplayViewModel}"/>
+            </Grid>
+        </Border>
+
+
+        <UniformGrid Grid.Row="1" Grid.Column="2" Rows="4">
+            <Button Style="{StaticResource screenButtonRight}" Command="{Binding DisplayButtonPress}" CommandParameter="5"/>
+            <Button Style="{StaticResource screenButtonRight}" Command="{Binding DisplayButtonPress}" CommandParameter="6"/>
+            <Button Style="{StaticResource screenButtonRight}" Command="{Binding DisplayButtonPress}" CommandParameter="7"/>
+            <Button Style="{StaticResource screenButtonRight}" Command="{Binding DisplayButtonPress}" CommandParameter="8"/>
+        </UniformGrid>
+
+        <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button FontSize="20" Padding="5,0" Width="250" Command="{Binding PaymentInsertion}">Insert Credit/Debit Card</Button>
+            <Border BorderBrush="Black" BorderThickness="5" Background="Silver" Margin="20, 10">
+                <UniformGrid Width="160" Height="250" Grid.Column="3" Grid.Row="1" Rows="4" Columns="3">
+                    <Button Style="{StaticResource keyPadButton}" Content="1" x:Name="KeyPad1" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="1"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="2" x:Name="KeyPad2" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="2"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="3" x:Name="KeyPad3" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="3"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="4" x:Name="KeyPad4" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="4"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="5" x:Name="KeyPad5" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="5"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="6" x:Name="KeyPad6" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="6"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="7" x:Name="KeyPad7" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="7"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="8" x:Name="KeyPad8" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="8"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="9" x:Name="KeyPad9" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="9"/>
+                    <Button Style="{StaticResource keyPadButton}" Background="Yellow" Foreground="Black" Content="Clear" x:Name="KeyPadClear" Command="{Binding ClearPhoneNumber}"/>
+                    <Button Style="{StaticResource keyPadButton}" Content="0" x:Name="KeyPad0" Command="{Binding AddCharacterToPhoneNumber}" CommandParameter="0"/>
+                    <Button Style="{StaticResource keyPadButton}" Background="LightGreen" Foreground="Black" Content="Enter" x:Name="KeyPadEnter" Command="{Binding PressedEnter}"/>
+                </UniformGrid>
+            </Border>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="3" Grid.ColumnSpan="3" Rows="1" Columns="4" Margin="0,8,0,0">
+
+            <StackPanel Background="ForestGreen">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Diesel</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5" Text="{Binding DieselPrice, Converter={StaticResource DoubleConverter2}}"></TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="26" Background="ForestGreen" Margin="10" Command="{Binding FuelSelectorCommand}" CommandParameter="Diesel">Diesel</Button>
+            </StackPanel>
+            <StackPanel Background="Red">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5">Regular</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5" Text="{Binding RegularPrice, Converter={StaticResource DoubleConverter2}}"></TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10" Command="{Binding FuelSelectorCommand}" CommandParameter="Regular">87</Button>
+            </StackPanel>
+            <StackPanel Background="LightGray">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Plus</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5" Text="{Binding PlusPrice, Converter={StaticResource DoubleConverter2}}"></TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10" Command="{Binding FuelSelectorCommand}" CommandParameter="Plus">89</Button>
+            </StackPanel>
+            <StackPanel Background="Silver">
+                <TextBlock Style="{StaticResource blockNumberLabel}" TextAlignment="Center" Margin="0, 5" Foreground="DodgerBlue">Premium</TextBlock>
+                <TextBlock Style="{StaticResource blockNumberText}" TextAlignment="Center" Margin="20, 5" Text="{Binding PremiumPrice, Converter={StaticResource DoubleConverter2}}"></TextBlock>
+                <Button Style="{StaticResource fuelTypeButton}" FontSize="42" Background="Yellow" Margin="10" Command="{Binding FuelSelectorCommand}" CommandParameter="Premium">91</Button>
+            </StackPanel>
+        </UniformGrid>
+
+        <DockPanel Grid.Column="4" Grid.RowSpan="3" Background="White">
+            <GroupBox DockPanel.Dock="Top" Margin="5" Padding="5">
+                <GroupBox.Header>
+                    <TextBlock FontSize="18" FontWeight="Bold">Settings</TextBlock>
+                </GroupBox.Header>
+                <StackPanel>
+                    <Button Command="{Binding ReInitializeCommand}">Restart pump</Button>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Center">
+            <Button Width="190" FontSize="20" Command="{Binding BeginFuelingCommand}">Begin Fueling</Button>
+        </StackPanel>
+    </Grid>
+</Window>

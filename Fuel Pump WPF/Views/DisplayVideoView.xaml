@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Fuel_Pump_WPF.DisplayVideoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fuel_Pump_WPF"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Background="Gray">
+        <TextBlock HorizontalAlignment="Center" Margin="0,15">FUELING IN PROGRESS</TextBlock>
+        <MediaElement Margin="5,0" Source="{Binding VideoName}"/>
+    </StackPanel>
+</UserControl>
